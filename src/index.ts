@@ -169,6 +169,7 @@ const main = async (params: any) => {
 
 			let status
 			for (;;) {
+				await delay(3e3)
 				status = await test.status(testRunId)
 				const doneRequests = status.requests.filter(
 					(r: any) => r.result,
@@ -188,8 +189,6 @@ const main = async (params: any) => {
 					// console.log(results)
 					break
 				}
-
-				await delay(100)
 			}
 			dispUpdateTests(results.tests)
 		}),

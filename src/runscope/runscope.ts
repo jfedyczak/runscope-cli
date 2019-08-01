@@ -53,6 +53,28 @@ export default class Runscope {
 		return this.makeRequestUrl(method, `${API_ENDPOINT}${url}`, data)
 	}
 
+	public async makeUnqueuedRequestUrl(
+		method: string,
+		url: string,
+		data?: any,
+	) {
+		const result = await request({
+			uri: url,
+			method,
+			headers: {
+				Authorization: `Bearer ${this.config.key}`,
+			},
+			json: true,
+			formData: data,
+		})
+		if (result.error) {
+			// console.log('error')
+			// console.log(url)
+			throw new Error(result.error)
+		}
+		return result.data
+	}
+
 	public async makeRequestUrl(method: string, url: string, data?: any) {
 		this.requestPromise = this.requestPromise.then(async () => {
 			// console.log(url)

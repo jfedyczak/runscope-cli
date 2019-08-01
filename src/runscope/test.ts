@@ -48,7 +48,7 @@ export default class Test {
 		const triggerURL = new URL(test.trigger_url)
 		triggerURL.searchParams.append('runscope_environment', env.id)
 		const testRun = await this.bucket.runscope.makeRequestUrl(
-			'GET',
+			'POST',
 			triggerURL.href,
 		)
 		return testRun.runs[0].test_run_id
